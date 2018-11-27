@@ -1,0 +1,10 @@
+server:
+  port: 8888
+  context-path: /
+spring: 
+  application:
+    name: push
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
