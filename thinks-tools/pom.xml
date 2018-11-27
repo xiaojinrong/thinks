@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xiao</groupId>
+		<artifactId>thinks</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>thinks-tools</artifactId>
+	<dependencies>
+		<!-- 汉字转拼音 -->
+		<dependency>
+			<groupId>com.xiao</groupId>
+			<artifactId>pinyin4j-2.5.0</artifactId>
+			<version>2.5.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/pinyin4j-2.5.0.jar</systemPath>
+		</dependency>
+	</dependencies>
+</project>

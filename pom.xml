@@ -7,9 +7,11 @@
 	<artifactId>thinks</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	
+
 	<modules>
 		<module>thinks-push</module>
+		<module>tools</module>
+		<module>thinks-tools</module>
 	</modules>
 
 	<parent>
@@ -29,6 +31,7 @@
 		<servlet.version>3.1.0</servlet.version>
 		<javaee.version>8.0</javaee.version>
 		<jstl.version>1.2</jstl.version>
+		<apache.poi.version>3.14</apache.poi.version>
 	</properties>
 
 	<dependencies>
@@ -117,6 +120,28 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
+		</dependency>
+
+		<!-- Apache POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${apache.poi.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
