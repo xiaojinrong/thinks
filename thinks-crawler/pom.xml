@@ -9,16 +9,13 @@
 		<artifactId>thinks</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>thinks-tools</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>thinks-crawler</artifactId>
+	<packaging>war</packaging>
 	<dependencies>
-		<!-- 汉字转拼音 -->
 		<dependency>
 			<groupId>com.xiao</groupId>
-			<artifactId>pinyin4j-2.5.0</artifactId>
-			<version>2.5.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/pinyin4j-2.5.0.jar</systemPath>
+			<artifactId>thinks-tools</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>
