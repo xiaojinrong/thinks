@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.data.dao.RolePermissionDao">
+
+	<resultMap type="com.xiao.data.entity.RolePermission" id="baseResultMap">
+        <id property="id" column="id" />
+        <result property="permissionId" column="permission_id" />
+        <result property="roleId" column="role_id" />
+	</resultMap>
+	
+	<!-- 字段SQL -->
+	<sql id="fieldSql">
+		id,permission_id,role_id
+	</sql>
+	
+	<!-- 查询对象 -->
+	<select id="get" parameterType="string" resultMap="baseResultMap">
+		SELECT
+		<include refid="fieldSql" />
+		FROM role_permission
+		<where>
+			id = #{id}
+		</where>
+	</select>
+	
+	<!-- 查询对象 -->
+	<select id="query" parameterType="rolePermission" resultMap="baseResultMap">
+		SELECT
+		<include refid="fieldSql" />
+		FROM role_permission
+		<where>
+            <if test="id!=null and id!=''">and id = #{id}</if>
+            <if test="permissionId!=null and permissionId!=''">and permission_id = #{permissionId}</if>
+            <if test="roleId!=null and roleId!=''">and role_id = #{roleId}</if>
+		</where>
+	</select>
+	
+	<!-- 保存对象 -->
+	<insert id="save" parameterType="rolePermission">
+		insert into role_permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">id,</if>
+            <if test="permissionId!=null and permissionId!=''">permission_id,</if>
+            <if test="roleId!=null and roleId!=''">role_id,</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">#{id},</if>
+            <if test="permissionId!=null and permissionId!=''">#{permissionId},</if>
+            <if test="roleId!=null and roleId!=''">#{roleId},</if>
+		</trim>
+	</insert>
+	
+	<!-- 更新对象 -->
+	<update id="update" parameterType="rolePermission">
+		update role_permission
+		<set>
+            <if test="permissionId!=null and permissionId!=''">permission_id = #{permissionId},</if>
+            <if test="roleId!=null and roleId!=''">role_id = #{roleId},</if>
+		</set>
+		<where>
+			id = #{id}		
+		</where>
+	</update>
+	
+	<!-- 删除对象 -->
+	<delete id="remove" parameterType="string">
+		delete from role_permission 
+		<where>
+			id = #{id}	
+		</where>
+	</delete>
+	
+	<!-- 批量删除对象 -->
+	<delete id="saveBatch" parameterType="list">
+		delete from role_permission 
+		<where>
+			id in
+			<foreach collection="ids" item="id" separator="," open="(" close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

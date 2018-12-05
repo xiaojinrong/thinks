@@ -8,6 +8,8 @@ import java.util.concurrent.Callable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xiao.tools.string.StringUtil;
+
 public class DownTextThread implements Callable<Integer> {
 
 	private static final Logger logger = LoggerFactory.getLogger(DownTextThread.class);

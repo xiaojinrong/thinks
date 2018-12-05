@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.data.dao.UserDao">
+
+	<resultMap type="com.xiao.data.entity.User" id="baseResultMap">
+        <id property="userId" column="user_id" />
+        <result property="userName" column="user_name" />
+        <result property="password" column="password" />
+        <result property="createdTime" column="created_time" />
+        <result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<!-- 字段SQL -->
+	<sql id="fieldSql">
+		user_id,user_name,password,created_time,update_time
+	</sql>
+	
+	<!-- 查询对象 -->
+	<select id="get" parameterType="string" resultMap="baseResultMap">
+		SELECT
+		<include refid="fieldSql" />
+		FROM user
+		<where>
+			user_id = #{id}
+		</where>
+	</select>
+	
+	<!-- 查询对象 -->
+	<select id="query" parameterType="user" resultMap="baseResultMap">
+		SELECT
+		<include refid="fieldSql" />
+		FROM user
+		<where>
+            <if test="userId!=null and userId!=''">and user_id = #{userId}</if>
+            <if test="userName!=null and userName!=''">and user_name = #{userName}</if>
+            <if test="password!=null and password!=''">and password = #{password}</if>
+            <if test="createdTime!=null and createdTime!=''">and created_time = #{createdTime}</if>
+            <if test="updateTime!=null and updateTime!=''">and update_time = #{updateTime}</if>
+		</where>
+	</select>
+	
+	<!-- 保存对象 -->
+	<insert id="save" parameterType="user">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null and userId!=''">user_id,</if>
+            <if test="userName!=null and userName!=''">user_name,</if>
+            <if test="password!=null and password!=''">password,</if>
+            <if test="createdTime!=null and createdTime!=''">created_time,</if>
+            <if test="updateTime!=null and updateTime!=''">update_time,</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null and userId!=''">#{userId},</if>
+            <if test="userName!=null and userName!=''">#{userName},</if>
+            <if test="password!=null and password!=''">#{password},</if>
+            <if test="createdTime!=null and createdTime!=''">#{createdTime},</if>
+            <if test="updateTime!=null and updateTime!=''">#{updateTime},</if>
+		</trim>
+	</insert>
+	
+	<!-- 更新对象 -->
+	<update id="update" parameterType="user">
+		update user
+		<set>
+            <if test="userName!=null and userName!=''">user_name = #{userName},</if>
+            <if test="password!=null and password!=''">password = #{password},</if>
+            <if test="createdTime!=null and createdTime!=''">created_time = #{createdTime},</if>
+            <if test="updateTime!=null and updateTime!=''">update_time = #{updateTime},</if>
+		</set>
+		<where>
+			user_id = #{userId}		
+		</where>
+	</update>
+	
+	<!-- 删除对象 -->
+	<delete id="remove" parameterType="string">
+		delete from user 
+		<where>
+			user_id = #{id}	
+		</where>
+	</delete>
+	
+	<!-- 批量删除对象 -->
+	<delete id="saveBatch" parameterType="list">
+		delete from user 
+		<where>
+			user_id in
+			<foreach collection="ids" item="id" separator="," open="(" close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

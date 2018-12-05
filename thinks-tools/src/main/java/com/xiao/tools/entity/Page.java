@@ -1,9 +1,15 @@
 package com.xiao.tools.entity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 分页
+ * 
  * @author XiaoJinRong
- * @times 2018年11月26日 下午12:24:09 
+ * @times 2018年11月26日 下午12:24:09
  * @version 1.0
  */
 public class Page {
@@ -13,27 +19,33 @@ public class Page {
 
 	/** 每页页数 */
 	private int pageSize;
-	
+
 	/** 总页数 */
 	private int totalPage;
-	
+
 	/** 总数量 */
 	private int totalSize;
-	
+
 	/** 起始页 */
 	private int startIndex;
-	
+
 	/** 终止页 */
 	private int endIndex;
-	
+
 	/** 下一页 */
 	private int nextPage;
-	
+
 	/** 上一页 */
 	private int prevPage;
-	
+
 	/** 数据 */
 	private Object result;
+
+	/** 查询条件 */
+	private List<PageSearch> searchParams = new ArrayList<PageSearch>();
+
+	/** 排序条件 */
+	private Map<String, String> orderParams = new HashMap<String, String>();
 
 	public int getPageIndex() {
 		return pageIndex;
@@ -105,5 +117,21 @@ public class Page {
 
 	public void setResult(Object result) {
 		this.result = result;
+	}
+
+	public List<PageSearch> getSearchParams() {
+		return searchParams;
+	}
+
+	public void setSearchParams(List<PageSearch> searchParams) {
+		this.searchParams = searchParams;
+	}
+
+	public Map<String, String> getOrderParams() {
+		return orderParams;
+	}
+
+	public void setOrderParams(Map<String, String> orderParams) {
+		this.orderParams = orderParams;
 	}
 }

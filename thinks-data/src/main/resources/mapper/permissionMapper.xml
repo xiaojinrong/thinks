@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.data.dao.PermissionDao">
+
+	<resultMap type="com.xiao.data.entity.Permission" id="baseResultMap">
+        <id property="permissionId" column="permission_id" />
+        <result property="dataCode" column="data_code" />
+        <result property="dataName" column="data_name" />
+        <result property="dataUrl" column="data_url" />
+        <result property="dataType" column="data_type" />
+        <result property="dataPid" column="data_pid" />
+        <result property="dataOrder" column="data_order" />
+        <result property="dataDescription" column="data_description" />
+        <result property="createdTime" column="created_time" />
+        <result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<!-- 字段SQL -->
+	<sql id="fieldSql">
+		permission_id,data_code,data_name,data_url,data_type,data_pid,data_order,data_description,created_time,update_time
+	</sql>
+	
+	<!-- 查询对象 -->
+	<select id="get" parameterType="string" resultMap="baseResultMap">
+		SELECT
+		<include refid="fieldSql" />
+		FROM permission
+		<where>
+			permission_id = #{id}
+		</where>
+	</select>
+	
+	<!-- 查询对象 -->
+	<select id="query" parameterType="permission" resultMap="baseResultMap">
+		SELECT
+		<include refid="fieldSql" />
+		FROM permission
+		<where>
+            <if test="permissionId!=null and permissionId!=''">and permission_id = #{permissionId}</if>
+            <if test="dataCode!=null and dataCode!=''">and data_code = #{dataCode}</if>
+            <if test="dataName!=null and dataName!=''">and data_name = #{dataName}</if>
+            <if test="dataUrl!=null and dataUrl!=''">and data_url = #{dataUrl}</if>
+            <if test="dataType!=null and dataType!=''">and data_type = #{dataType}</if>
+            <if test="dataPid!=null and dataPid!=''">and data_pid = #{dataPid}</if>
+            <if test="dataOrder!=null and dataOrder!=''">and data_order = #{dataOrder}</if>
+            <if test="dataDescription!=null and dataDescription!=''">and data_description = #{dataDescription}</if>
+            <if test="createdTime!=null and createdTime!=''">and created_time = #{createdTime}</if>
+            <if test="updateTime!=null and updateTime!=''">and update_time = #{updateTime}</if>
+		</where>
+	</select>
+	
+	<!-- 保存对象 -->
+	<insert id="save" parameterType="permission">
+		insert into permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionId!=null and permissionId!=''">permission_id,</if>
+            <if test="dataCode!=null and dataCode!=''">data_code,</if>
+            <if test="dataName!=null and dataName!=''">data_name,</if>
+            <if test="dataUrl!=null and dataUrl!=''">data_url,</if>
+            <if test="dataType!=null and dataType!=''">data_type,</if>
+            <if test="dataPid!=null and dataPid!=''">data_pid,</if>
+            <if test="dataOrder!=null and dataOrder!=''">data_order,</if>
+            <if test="dataDescription!=null and dataDescription!=''">data_description,</if>
+            <if test="createdTime!=null and createdTime!=''">created_time,</if>
+            <if test="updateTime!=null and updateTime!=''">update_time,</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionId!=null and permissionId!=''">#{permissionId},</if>
+            <if test="dataCode!=null and dataCode!=''">#{dataCode},</if>
+            <if test="dataName!=null and dataName!=''">#{dataName},</if>
+            <if test="dataUrl!=null and dataUrl!=''">#{dataUrl},</if>
+            <if test="dataType!=null and dataType!=''">#{dataType},</if>
+            <if test="dataPid!=null and dataPid!=''">#{dataPid},</if>
+            <if test="dataOrder!=null and dataOrder!=''">#{dataOrder},</if>
+            <if test="dataDescription!=null and dataDescription!=''">#{dataDescription},</if>
+            <if test="createdTime!=null and createdTime!=''">#{createdTime},</if>
+            <if test="updateTime!=null and updateTime!=''">#{updateTime},</if>
+		</trim>
+	</insert>
+	
+	<!-- 更新对象 -->
+	<update id="update" parameterType="permission">
+		update permission
+		<set>
+            <if test="dataCode!=null and dataCode!=''">data_code = #{dataCode},</if>
+            <if test="dataName!=null and dataName!=''">data_name = #{dataName},</if>
+            <if test="dataUrl!=null and dataUrl!=''">data_url = #{dataUrl},</if>
+            <if test="dataType!=null and dataType!=''">data_type = #{dataType},</if>
+            <if test="dataPid!=null and dataPid!=''">data_pid = #{dataPid},</if>
+            <if test="dataOrder!=null and dataOrder!=''">data_order = #{dataOrder},</if>
+            <if test="dataDescription!=null and dataDescription!=''">data_description = #{dataDescription},</if>
+            <if test="createdTime!=null and createdTime!=''">created_time = #{createdTime},</if>
+            <if test="updateTime!=null and updateTime!=''">update_time = #{updateTime},</if>
+		</set>
+		<where>
+			permission_id = #{permissionId}		
+		</where>
+	</update>
+	
+	<!-- 删除对象 -->
+	<delete id="remove" parameterType="string">
+		delete from permission 
+		<where>
+			permission_id = #{id}	
+		</where>
+	</delete>
+	
+	<!-- 批量删除对象 -->
+	<delete id="saveBatch" parameterType="list">
+		delete from permission 
+		<where>
+			permission_id in
+			<foreach collection="ids" item="id" separator="," open="(" close=")">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>
