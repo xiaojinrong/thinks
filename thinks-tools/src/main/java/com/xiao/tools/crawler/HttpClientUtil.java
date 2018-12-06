@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.net.ssl.SSLException;
@@ -34,12 +35,15 @@ import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+
+import com.xiao.tools.string.StringUtil;
 
 /**
  * HttpClient工具类
@@ -174,11 +178,11 @@ public class HttpClientUtil {
 	 * @param httpost
 	 * @param params
 	 */
-	private static void setPostParams(HttpPost httpost, Map<String, Object> params) {
+	private static void setPostParams(HttpPost httpost, Map<String, String> params) {
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		Set<String> keySet = params.keySet();
 		for (String key : keySet) {
-			nvps.add(new BasicNameValuePair(key, params.get(key).toString()));
+			nvps.add(new BasicNameValuePair(key, params.get(key)));
 		}
 		try {
 			httpost.setEntity(new UrlEncodedFormEntity(nvps, CHARSET_UTF_8));
@@ -195,10 +199,36 @@ public class HttpClientUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String post(String url, Map<String, Object> params) {
+	public static String post(String url, Map<String, String> params) {
 		HttpPost httppost = new HttpPost(url);
 		config(httppost);
 		setPostParams(httppost, params);
+		try (CloseableHttpResponse response = getHttpClient(url).execute(httppost, HttpClientContext.create())) {
+			HttpEntity entity = response.getEntity();
+			String result = EntityUtils.toString(entity, CHARSET_UTF_8);
+			EntityUtils.consume(entity);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Post请求
+	 * 
+	 * @param url
+	 * @param jsonText
+	 *            JSON字符串参数
+	 * @return
+	 */
+	public static String postJson(String url, String jsonText) {
+		HttpPost httppost = new HttpPost(url);
+		config(httppost);
+		StringEntity entitys = new StringEntity(jsonText, CHARSET_UTF_8);
+		entitys.setContentType("application/json");
+		entitys.setContentEncoding(CHARSET_UTF_8);
+		httppost.setEntity(entitys);
 		try (CloseableHttpResponse response = getHttpClient(url).execute(httppost, HttpClientContext.create())) {
 			HttpEntity entity = response.getEntity();
 			String result = EntityUtils.toString(entity, CHARSET_UTF_8);
@@ -228,6 +258,23 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * Get请求内容
+	 * 
+	 * @param url
+	 * @param paramMap
+	 * @return
+	 */
+	public static String get(String url, Map<String, ?> paramMap) {
+		String params = "";
+		for (Entry<String, ?> param : paramMap.entrySet()) {
+			params += param.getKey() + "=" + StringUtil.toString(param.getValue()) + "&";
+		}
+		String lastCh = url.indexOf("?") == -1 ? "?" : "&";
+		url = url + lastCh + StringUtil.subLast(params, "&");
+		return get(url);
 	}
 
 }

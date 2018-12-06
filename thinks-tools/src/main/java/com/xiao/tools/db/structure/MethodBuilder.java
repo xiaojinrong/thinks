@@ -128,7 +128,7 @@ public class MethodBuilder {
 		if (StringUtil.isEmpty(this.content)) {
 			this.content = content;
 		} else {
-			this.content = StringUtil.parseStr(this.content) + StringUtil.LINE + StringUtil.SPACE_EIGHT + content;
+			this.content = StringUtil.toString(this.content) + StringUtil.LINE + StringUtil.SPACE_EIGHT + content;
 		}
 	}
 
@@ -175,12 +175,12 @@ public class MethodBuilder {
 			sb.append(annotationBuilder);
 			sb.append(StringUtil.LINE);
 		}
-		sb.append(StringUtil.SPACE_FOUR).append(StringUtil.parseStr(this.access)).append(" ").append(this.returnType)
+		sb.append(StringUtil.SPACE_FOUR).append(StringUtil.toString(this.access)).append(" ").append(this.returnType)
 				.append(" ");
 		sb.append(this.name).append("(");
 		String paramString = "";
 		for (ParamBuilder paramBuilder : paramBuilders) {
-			paramString += StringUtil.parseStr(paramBuilder.getAnnotationBuilder()) + " " + paramBuilder.getType() + " "
+			paramString += StringUtil.toString(paramBuilder.getAnnotationBuilder()) + " " + paramBuilder.getType() + " "
 					+ paramBuilder.getValue() + ",";
 		}
 		paramString = paramString != "" ? paramString.substring(0, paramString.lastIndexOf(",")) : paramString;
@@ -191,7 +191,7 @@ public class MethodBuilder {
 			sb.append(";");
 		} else {
 			sb.append("{").append(StringUtil.LINE).append(StringUtil.SPACE_EIGHT)
-					.append(StringUtil.parseStr(this.content));
+					.append(StringUtil.toString(this.content));
 			sb.append(StringUtil.LINE).append(StringUtil.SPACE_FOUR).append("}");
 		}
 		return sb.toString();

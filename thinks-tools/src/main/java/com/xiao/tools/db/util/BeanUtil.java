@@ -15,7 +15,7 @@ public class BeanUtil {
 	 */
 	public static void createBeanFile(String paths, ClassBuilder classBuilder) {
 		// 判断类是否存在所属包
-		paths = paths + StringUtil.parseStr(classBuilder.getPackageName()).replace(".", "/") + "/"
+		paths = paths + StringUtil.toString(classBuilder.getPackageName()).replace(".", "/") + "/"
 				+ classBuilder.getClassName() + ".java";
 		FileUtil.writeFile(paths, classBuilder.toString());
 	}

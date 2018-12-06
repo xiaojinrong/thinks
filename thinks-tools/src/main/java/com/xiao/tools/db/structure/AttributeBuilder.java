@@ -124,11 +124,11 @@ public class AttributeBuilder {
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(StringUtil.SPACE_FOUR).append("/** ").append(StringUtil.parseStr(this.documentInfo)).append(" */").append(StringUtil.LINE);
+		sb.append(StringUtil.SPACE_FOUR).append("/** ").append(StringUtil.toString(this.documentInfo)).append(" */").append(StringUtil.LINE);
 		for (AnnotationBuilder annotationBuilder : annotationBuilders) {
 			sb.append(annotationBuilder).append(StringUtil.LINE);
 		}
-		sb.append(StringUtil.SPACE_FOUR).append(StringUtil.parseStr(this.access)).append(" ");
+		sb.append(StringUtil.SPACE_FOUR).append(StringUtil.toString(this.access)).append(" ");
 		sb.append(this.type).append(" ").append(this.name);
 		if(!StringUtil.isEmpty(this.defaultValue)) {
 			sb.append(" = ").append(this.defaultValue);

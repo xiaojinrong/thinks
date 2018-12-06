@@ -43,9 +43,24 @@ public class StringUtil {
 	 * @param obj
 	 * @return
 	 */
-	public static String parseStr(Object obj) {
+	public static String toString(Object obj) {
 		String text = obj == null ? "" : String.valueOf(obj);
 		return text;
+	}
+
+	/**
+	 * 截取最后一个字符
+	 * 
+	 * @param source
+	 * @param ch
+	 * @return
+	 */
+	public static String subLast(String source, String chats) {
+		if (isEmpty(source)) {
+			return "";
+		}
+		int index = source.lastIndexOf(chats);
+		return index != -1 ? source.substring(0, index) : source;
 	}
 
 	/**
@@ -62,6 +77,12 @@ public class StringUtil {
 		return index != -1 ? source.substring(0, index) : source;
 	}
 
+	/**
+	 * 截取最后一个换行
+	 * 
+	 * @param source
+	 * @return
+	 */
 	public static String subLine(String source) {
 		if (isEmpty(source)) {
 			return "";

@@ -194,7 +194,7 @@ public class ClassBuilder {
 			sb.append("import").append(" ").append(dependency).append(";").append(StringUtil.LINE);
 		}
 		// 注释
-		sb.append("/**").append(StringUtil.LINE).append(" * ").append(StringUtil.parseStr(this.documentInfo))
+		sb.append("/**").append(StringUtil.LINE).append(" * ").append(StringUtil.toString(this.documentInfo))
 				.append(StringUtil.LINE);
 		sb.append(" * @author ").append(System.getenv("username")).append(StringUtil.LINE);
 		sb.append(" * @times ").append(DateUtil.parseDate(new Date())).append(StringUtil.LINE);
