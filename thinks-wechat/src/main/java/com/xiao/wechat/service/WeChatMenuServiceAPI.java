@@ -26,4 +26,18 @@ public interface WeChatMenuServiceAPI {
 	 * @return
 	 */
 	String createMenu(Map<String, Object> paramMap);
+
+	/**
+	 * 自定义菜单删除
+	 * 
+	 * @return
+	 */
+	String removeMenu();
+
+	/**
+	 * 获取自定义菜单配置接口(权限配置)
+	 * 
+	 * @return
+	 */
+	String getSelfmenu();
 }

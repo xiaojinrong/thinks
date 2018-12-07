@@ -2,9 +2,24 @@ package com.xiao.tools.number;
 
 import java.text.DecimalFormat;
 
+import com.xiao.tools.string.StringUtil;
+
 public class NumberUtil {
 
 	private static DecimalFormat DF = new DecimalFormat("0.00");
+
+	/**
+	 * 转为Int
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static int parseInt(Object object) {
+		if (StringUtil.isEmpty(object)) {
+			return 0;
+		}
+		return Integer.parseInt(StringUtil.toString(object));
+	}
 
 	/**
 	 * 计算百分比

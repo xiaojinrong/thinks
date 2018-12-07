@@ -19,4 +19,14 @@ public class WeChatMenuServiceImpl extends BaseWeChatService implements WeChatMe
 		return request("createMenu", paramMap);
 	}
 
+	@Override
+	public String removeMenu() {
+		return requestToken("removeMenu");
+	}
+
+	@Override
+	public String getSelfmenu() {
+		return requestToken("getSelfmenu");
+	}
+
 }

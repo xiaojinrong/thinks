@@ -1,17 +1,18 @@
-wechat: 
+wechat:
+  baseUrl: https://api.weixin.qq.com/cgi-bin
   wechatAPIs: 
     #获取access_token
     getAccessToken: 
-      url: https://api.weixin.qq.com/cgi-bin/token
+      url: ${wechat.baseUrl}/token
       paramMap: 
         grant_type: client_credential
         appid: ${wechat.appId}
         secret: ${wechat.appSecret}
     #获取微信服务器IP地址
-    getWechatIp.url: https://api.weixin.qq.com/cgi-bin/getcallbackip
+    getWechatIp.url: ${wechat.baseUrl}/getcallbackip
     #微信网络检查
     checkNet: 
-      url: https://api.weixin.qq.com/cgi-bin/callback/check
+      url: ${wechat.baseUrl}/callback/check
       method: POST
       paramType: JSON
       paramMap: 
@@ -19,9 +20,11 @@ wechat:
         check_operator: DEFAULT
     #自定义菜单
     #菜单查询
-    getMenu.url: https://api.weixin.qq.com/cgi-bin/menu/get
+    getMenu.url: ${wechat.baseUrl}/menu/get
     #菜单创建
     createMenu: 
-      url: https://api.weixin.qq.com/cgi-bin/menu/create
+      url: ${wechat.baseUrl}/menu/create
       method: POST
-      paramType: JSON 
+      paramType: JSON
+    removeMenu.url: ${wechat.baseUrl}/menu/delete
+    getSelfmenu.url: ${wechat.baseUrl}/get_current_selfmenu_info

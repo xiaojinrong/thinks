@@ -62,7 +62,7 @@ public class HttpClientUtil {
 
 	private static final String REFERER_VALUE = "http://www.baidu.com";
 
-	private static final String CHARSET_UTF_8 = "gb2312";
+	private static final String CHARSET_UTF_8 = "UTF-8";
 
 	private static final int TIME_OUT = 10 * 1000;
 

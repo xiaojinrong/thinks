@@ -90,4 +90,30 @@ public class StringUtil {
 		int index = source.lastIndexOf(StringUtil.LINE);
 		return index != -1 ? source.substring(0, index) : source;
 	}
+
+	/**
+	 * 首字母大写
+	 * 
+	 * @param propertyName
+	 * @return
+	 */
+	public static String firstWordUpper(String propertyName) {
+		if (StringUtil.isEmpty(propertyName)) {
+			return "";
+		}
+		return propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+	}
+
+	/**
+	 * 首字母小写
+	 * 
+	 * @param propertyName
+	 * @return
+	 */
+	public static String firstWordLower(String propertyName) {
+		if (StringUtil.isEmpty(propertyName)) {
+			return "";
+		}
+		return propertyName.substring(0, 1).toLowerCase() + propertyName.substring(1);
+	}
 }

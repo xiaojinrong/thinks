@@ -1,11 +1,12 @@
 package com.xiao.wechat.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,10 +24,13 @@ public class WeChatMenuController {
 		return weChatMenuServiceAPI.getMenu();
 	}
 
-	@GetMapping("/create")
-	public String createMenu() {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
+	@PostMapping("/create")
+	public String createMenu(@RequestBody Map<String, Object> paramMap) {
 		return weChatMenuServiceAPI.createMenu(paramMap);
 	}
 
+	@GetMapping("/getSelfmenu")
+	public String getSelfmenu() {
+		return weChatMenuServiceAPI.getSelfmenu();
+	}
 }

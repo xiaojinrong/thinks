@@ -25,6 +25,8 @@ public class WeChatConfig {
 	private String token;
 
 	private String accessToken;
+	
+	private String baseUrl;
 
 	private Map<String, WechatAPI> wechatAPIs;
 
@@ -84,5 +86,13 @@ public class WeChatConfig {
 
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
+	}
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
 	}
 }

@@ -1,25 +1,22 @@
 package com.xiao.wechat.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xiao.wechat.config.WeChatConfig;
-import com.xiao.wechat.service.impl.WeChatService;
+import com.xiao.wechat.service.WeChatServiceAPI;
 import com.xiao.wechat.util.WechatUtil;
 
 @RestController
 @RequestMapping("/weChat")
 public class WeChatCotroller {
 
-	/** 微信信息配置 */
 	@Resource
-	private WeChatConfig weChatConfig;
-
-	@Resource
-	private WeChatService weChatService;
+	private WeChatServiceAPI weChatServiceAPI;
 
 	/**
 	 * 验证消息的确来自微信服务器
@@ -36,38 +33,17 @@ public class WeChatCotroller {
 	 */
 	@GetMapping("/checkSignature")
 	public String checkSignature(String signature, String timestamp, String nonce, String echostr) {
-		String source = WechatUtil.checkSignature(weChatConfig.getToken(), timestamp, nonce);
-		return source.equalsIgnoreCase(signature) ? echostr : "";
+		return WechatUtil.checkSignature(signature, timestamp, nonce) ? echostr : "";
 	}
 
 	/**
-	 * 获取access_token
+	 * 接收微信服务器事件
 	 * 
+	 * @param request
 	 * @return
 	 */
-	@GetMapping("/getAccessToken")
-	public String getAccessToken() {
-		return weChatService.getAccessToken();
+	@PostMapping("/checkSignature")
+	public String processMsg(HttpServletRequest request) {
+		return weChatServiceAPI.processRequest(request);
 	}
-
-	/**
-	 * 获取微信服务器IP地址
-	 * 
-	 * @return
-	 */
-	@GetMapping("/getWechatIp")
-	public String getWechatIp() {
-		return weChatService.getWechatIp();
-	}
-
-	/**
-	 * 网络检查
-	 * 
-	 * @return
-	 */
-	@GetMapping("/checkNet")
-	public String checkNet() {
-		return weChatService.checkNet();
-	}
-
 }

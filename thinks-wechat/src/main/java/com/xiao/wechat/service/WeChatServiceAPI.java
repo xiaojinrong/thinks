@@ -1,5 +1,7 @@
 package com.xiao.wechat.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * WeChat
  * 
@@ -29,5 +31,13 @@ public interface WeChatServiceAPI {
 	 * @return
 	 */
 	String checkNet();
+
+	/**
+	 * 接收微信服务器事件
+	 * 
+	 * @param request
+	 * @return
+	 */
+	String processRequest(HttpServletRequest request);
 
 }

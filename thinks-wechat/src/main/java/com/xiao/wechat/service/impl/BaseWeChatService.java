@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import com.xiao.tools.crawler.HttpClientUtil;
 import com.xiao.tools.json.JsonUtil;
+import com.xiao.tools.string.StringUtil;
 import com.xiao.wechat.config.WeChatConfig;
 import com.xiao.wechat.config.WechatAPI;
 import com.xiao.wechat.util.WechatUtil;
@@ -42,7 +43,8 @@ public abstract class BaseWeChatService {
 		}
 		if (result.contains("errcode")) {
 			Map<String, Object> resultMap = JsonUtil.toMap(result);
-			return weChatConfig.getCodes().get(resultMap.get("errcode").toString());
+			String errorMsg = weChatConfig.getCodes().get(resultMap.get("errcode").toString());
+			return StringUtil.isEmpty(errorMsg) ? result : errorMsg;
 		}
 		return result;
 	}
@@ -82,7 +84,8 @@ public abstract class BaseWeChatService {
 	private WechatAPI setWechatAPIUrl(String type) {
 		WechatAPI wechartAPI = weChatConfig.getWechatAPIs().get(type);
 		String lastCh = wechartAPI.getUrl().indexOf("?") == -1 ? "?" : "&";
-		String url = wechartAPI.getUrl() + lastCh + weChatConfig.getAccessToken() + "=" + WechatUtil.ACCESS_TOKEN;
+		String url = wechartAPI.getUrl() + lastCh + weChatConfig.getAccessToken() + "="
+				+ WechatUtil.ACCESS_TOKEN.getAccessToken();
 		wechartAPI.setUrl(url);
 		return wechartAPI;
 	}
