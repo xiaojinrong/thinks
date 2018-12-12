@@ -12,4 +12,11 @@
 	<artifactId>thinks-push</artifactId>
 	<packaging>war</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.xiao</groupId>
+			<artifactId>thinks-tools</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>

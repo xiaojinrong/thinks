@@ -31,4 +31,41 @@ public class DateUtil {
 	public static int getNowSecond() {
 		return (int) (System.currentTimeMillis() / 1000);
 	}
+
+	/**
+	 * 毫秒转换时间(最大时间单位)
+	 * 
+	 * @param timeMillis
+	 * @return 1000 60000 3600000
+	 */
+	public static String toTime(long timeMillis) {
+		String date = "";
+		if (timeMillis < 1000) {
+			date = timeMillis + "毫秒";
+		} else if (timeMillis < 60000) {
+			date = timeMillis / 1000 + "秒" + timeMillis % 1000 + "毫秒";
+		} else if (timeMillis < 3600000) {
+			date = timeMillis / 60000 + "分" + timeMillis % 60000 / 1000 + "秒" + timeMillis % 60000 % 1000 + "毫秒";
+		} else {
+			date = timeMillis / 3600000 + "小时" + timeMillis % 3600000 / 60000 + "分"
+					+ timeMillis % 3600000 % 60000 / 1000 + "秒";
+		}
+		return date;
+	}
+
+	/**
+	 * 时间差（和当前时间比较）
+	 * 
+	 * @param startTimeMillis
+	 * @return
+	 */
+	public static String diffCurrentTime(long startTimeMillis) {
+		long diffTime = System.currentTimeMillis() - startTimeMillis;
+		return toTime(diffTime);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Long.MAX_VALUE);
+	}
+
 }

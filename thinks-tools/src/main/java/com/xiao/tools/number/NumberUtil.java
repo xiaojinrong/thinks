@@ -9,7 +9,7 @@ public class NumberUtil {
 	private static DecimalFormat DF = new DecimalFormat("0.00");
 
 	/**
-	 * 转为Int
+	 * 转为int
 	 * 
 	 * @param object
 	 * @return
@@ -19,6 +19,19 @@ public class NumberUtil {
 			return 0;
 		}
 		return Integer.parseInt(StringUtil.toString(object));
+	}
+
+	/**
+	 * 转为long
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static long parseLong(Object object) {
+		if (StringUtil.isEmpty(object)) {
+			return 0l;
+		}
+		return Long.parseLong(StringUtil.toString(object));
 	}
 
 	/**
@@ -48,5 +61,34 @@ public class NumberUtil {
 			result = DF.format(size / 1073741824) + "GB";
 		}
 		return result;
+	}
+
+	/**
+	 * b/s --> kb/s --> mb/s --> gb/s 宽带转换
+	 * 
+	 * @param size
+	 * @param millis
+	 * @return
+	 */
+	public static String broadbands(double size) {
+		String result = "";
+		if (size < 1.24) {
+			result = DF.format(size * 1000) + "B/S";
+		} else if (size < 1024) {
+			result = DF.format(size / 1.24) + "KB/S";
+		} else {
+			result = DF.format(size / 1048.576) + "MB/S";
+		}
+		return result;
+	}
+
+	/**
+	 * 保留2位小数
+	 * 
+	 * @param number
+	 * @return
+	 */
+	public static String toDecimal(double number) {
+		return DF.format(number);
 	}
 }

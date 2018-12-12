@@ -1,30 +1,194 @@
 wechat:
-  baseUrl: https://api.weixin.qq.com/cgi-bin
+  baseUrl: https://api.weixin.qq.com
   wechatAPIs: 
     #获取access_token
     getAccessToken: 
-      url: ${wechat.baseUrl}/token
+      url: ${wechat.baseUrl}/cgi-bin/token
       paramMap: 
         grant_type: client_credential
         appid: ${wechat.appId}
         secret: ${wechat.appSecret}
+
     #获取微信服务器IP地址
-    getWechatIp.url: ${wechat.baseUrl}/getcallbackip
+    getWechatIp.url: ${wechat.baseUrl}/cgi-bin/getcallbackip
+
     #微信网络检查
     checkNet: 
-      url: ${wechat.baseUrl}/callback/check
+      url: ${wechat.baseUrl}/cgi-bin/callback/check
       method: POST
       paramType: JSON
       paramMap: 
         action: all
         check_operator: DEFAULT
+    
     #自定义菜单
     #菜单查询
-    getMenu.url: ${wechat.baseUrl}/menu/get
+    getMenu.url: ${wechat.baseUrl}/cgi-bin/menu/get
     #菜单创建
     createMenu: 
-      url: ${wechat.baseUrl}/menu/create
+      url: ${wechat.baseUrl}/cgi-bin/menu/create
       method: POST
       paramType: JSON
-    removeMenu.url: ${wechat.baseUrl}/menu/delete
-    getSelfmenu.url: ${wechat.baseUrl}/get_current_selfmenu_info
+    #菜单删除
+    removeMenu.url: ${wechat.baseUrl}/cgi-bin/menu/delete
+    #自定义菜单
+    getSelfmenu.url: ${wechat.baseUrl}/cgi-bin/get_current_selfmenu_info
+    
+    #客服账号管理
+    #添加客服账号
+    addAgent:
+      url: ${wechat.baseUrl}/customservice/kfaccount/add
+      method: POST
+      paramType: JSON
+    #修改客户账号
+    updateAgent: 
+      url: ${wechat.baseUrl}/customservice/kfaccount/update
+      method: POST
+      paramType: JSON
+    #删除客服帐号
+    removeAgent.url: ${wechat.baseUrl}/customservice/kfaccount/del
+    #获取所有客服账号
+    getAllAgent.url: ${wechat.baseUrl}/cgi-bin/customservice/getkflist
+    #客服接口-发消息
+    sendMsgByAgent:
+      url: ${wechat.baseUrl}/cgi-bin/message/custom/send
+      method: POST
+      paramType: JSON
+    #客服输入状态
+    sendAgentStatus:
+      url: ${wechat.baseUrl}/cgi-bin/message/custom/typing
+      method: POST
+      paramType: JSON
+      
+    #群发接口
+    
+    #模板消息
+    #设置所属行业
+    setTemplateIndustry:
+      url: ${wechat.baseUrl}/cgi-bin/template/api_set_industry
+      method: POST
+      paramType: JSON
+    #获取设置的行业信息
+    getTemplateIndustryInfo.url: ${wechat.baseUrl}/cgi-bin/template/get_industry
+    #获得模板ID
+    getTemplateId:
+      url: ${wechat.baseUrl}/cgi-bin/template/api_add_template
+      method: POST
+      paramType: JSON
+    #获取模板列表
+    getTemplateList.url: ${wechat.baseUrl}/cgi-bin/template/get_all_private_template
+    #删除模板
+    removeTemplate:
+      url: ${wechat.baseUrl}/cgi-bin/template/del_private_template
+      method: POST
+      paramType: JSON
+    #发送模板消息
+    sendTemplateMsg:
+      url: ${wechat.baseUrl}/cgi-bin/message/template/send
+      method: POST
+      paramType: JSON
+    #素材管理
+    #上传临时素材
+    uploadMedia: 
+      url: ${wechat.baseUrl}/cgi-bin/media/upload
+      method: POST
+    #获取临时素材
+    getMedia.url: ${wechat.baseUrl}/cgi-bin/media/get
+    #新增永久图文素材
+    addMaterial:
+      url: ${wechat.baseUrl}/cgi-bin/material/add_news
+      method: POST
+    #上传图文消息内的图片获取URL
+    uploadMediaImg: 
+      url: ${wechat.baseUrl}/cgi-bin/media/uploadimg
+      method: POST
+    #新增其他类型永久素材
+    uploadMediaOthers: 
+      url: ${wechat.baseUrl}/cgi-bin/material/add_material
+      method: POST
+    #获取永久素材
+    getMaterial: 
+      url: ${wechat.baseUrl}/cgi-bin/material/get_material
+      method: POST
+      paramType: JSON
+    #删除永久素材
+    removeMaterial: 
+      url: ${wechat.baseUrl}/cgi-bin/material/del_material
+      method: POST
+      paramType: JSON
+    #修改永久图文素材
+    updateMaterial:
+      url: ${wechat.baseUrl}/cgi-bin/material/update_news
+      method: POST
+      paramType: JSON
+    #获取素材总数
+    getMaterialCount.url: ${wechat.baseUrl}/cgi-bin/material/get_materialcount
+    #获取素材列表
+    getMaterialList: 
+      url: ${wechat.baseUrl}/cgi-bin/material/batchget_material
+      method: POST
+      paramType: JSON
+    
+    #用户管理
+    #创建用户标签
+    createCustomerTag:
+      url: ${wechat.baseUrl}/cgi-bin/tags/create
+      method: POST
+      paramType: JSON
+    #获取公众号已创建的标签
+    getCustomerTag.url: ${wechat.baseUrl}/cgi-bin/tags/get
+    #编辑标签  
+    updatecCustomerTag:
+      url: ${wechat.baseUrl}/cgi-bin/tags/update
+      method: POST
+      paramType: JSON
+    #删除标签
+    removeCustomerTag: 
+      url: ${wechat.baseUrl}/cgi-bin/tags/delete
+      method: POST
+      paramType: JSON
+    #获取标签下粉丝列表
+    getTagUser:
+      url: ${wechat.baseUrl}/cgi-bin/user/tag/get 
+      method: POST
+      paramType: JSON
+    #批量为用户打标签
+    batchAddTag:
+      url: ${wechat.baseUrl}/cgi-bin/tags/members/batchtagging
+      method: POST
+      paramType: JSON
+    #批量为用户取消标签
+    batchCancalTag:
+      url: ${wechat.baseUrl}/cgi-bin/tags/members/batchuntagging
+      method: POST
+      paramType: JSON
+    #获取用户身上的标签列表
+    getTagListByCustomer: 
+      url: ${wechat.baseUrl}/cgi-bin/tags/getidlist
+      method: POST
+      paramType: JSON
+    #设置用户备注名
+    updateCustomerRemark: 
+      url: ${wechat.baseUrl}/cgi-bin/user/info/updateremark
+      method: POST
+      paramType: JSON
+    #获取用户基本信息
+    getCustomerInfo.url: ${wechat.baseUrl}/cgi-bin/user/info
+    #获取用户列表
+    getCustomerList.url: ${wechat.baseUrl}/cgi-bin/user/get
+    #黑名单管理
+    #获取公众号的黑名单列表
+    getBlackList:
+      url: ${wechat.baseUrl}/cgi-bin/tags/members/getblacklist  
+      method: POST
+      paramType: JSON
+    #拉黑用户
+    batchBlackList:
+      url: ${wechat.baseUrl}/cgi-bin/tags/members/batchblacklist
+      method: POST
+      paramType: JSON
+    #取消拉黑用户
+    batchUnblackList:
+      url: ${wechat.baseUrl}/cgi-bin/tags/members/batchunblacklist
+      method: POST
+      paramType: JSON

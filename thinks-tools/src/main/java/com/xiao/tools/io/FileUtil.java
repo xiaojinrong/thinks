@@ -27,6 +27,24 @@ public class FileUtil {
 	}
 
 	/**
+	 * 字符串生成TXT文件
+	 * 
+	 * @param text
+	 * @return
+	 */
+	public static boolean writeFile(String path, String text, boolean append) {
+		boolean flag = false;
+		createFilePath(path);
+		File file = new File(path);
+		try (FileWriter writer = new FileWriter(file, append);) {
+			writer.write(text);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	/**
 	 * 读取TXT文件字符串
 	 * 
 	 * @param path
