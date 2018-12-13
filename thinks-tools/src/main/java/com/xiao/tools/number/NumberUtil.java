@@ -18,7 +18,10 @@ public class NumberUtil {
 		if (StringUtil.isEmpty(object)) {
 			return 0;
 		}
-		return Integer.parseInt(StringUtil.toString(object));
+		String number = StringUtil.toString(object);
+		int index = number.lastIndexOf(".");
+		number = index == -1 ? number : number.substring(0, index);
+		return Integer.parseInt(number);
 	}
 
 	/**
@@ -29,9 +32,12 @@ public class NumberUtil {
 	 */
 	public static long parseLong(Object object) {
 		if (StringUtil.isEmpty(object)) {
-			return 0l;
+			return 0;
 		}
-		return Long.parseLong(StringUtil.toString(object));
+		String number = StringUtil.toString(object);
+		int index = number.lastIndexOf(".");
+		number = index == -1 ? number : number.substring(0, index);
+		return Long.parseLong(number);
 	}
 
 	/**
@@ -41,6 +47,15 @@ public class NumberUtil {
 	 */
 	public static String percent(long count, long total) {
 		return DF.format(count * 100.0 / total) + "%";
+	}
+
+	/**
+	 * 计算百分比
+	 * 
+	 * @return 返回 98.99
+	 */
+	public static double percents(long count, long total) {
+		return Double.parseDouble(DF.format(count * 100.0 / total));
 	}
 
 	/**

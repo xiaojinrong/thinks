@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xiao.tools.net.DownLoadUtil;
@@ -21,7 +22,7 @@ public class ProgressController {
 
 	@GetMapping("/push")
 	public String toDown() {
-		return "push";
+		return "index";
 	}
 
 	@RequestMapping("/down")
@@ -31,10 +32,11 @@ public class ProgressController {
 	}
 
 	@PostMapping("/upload")
+	@ResponseBody
 	public String upload(@RequestParam("file") MultipartFile file, ModelMap modelMap) throws Exception {
-		File img = new File("D://" + file.getOriginalFilename());
+		File img = new File("D://2/" + file.getOriginalFilename());
 		file.transferTo(img);
-		return "push";
+		return "OK";
 	}
 
 }

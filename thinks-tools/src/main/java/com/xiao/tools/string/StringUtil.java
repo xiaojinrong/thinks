@@ -34,7 +34,7 @@ public class StringUtil {
 	 * @return
 	 */
 	public static boolean isEmpty(Object obj) {
-		return (obj == null) || (!(obj instanceof String)) || (String.valueOf(obj).trim().length() == 0);
+		return obj == null || obj.toString().trim().length() == 0;
 	}
 
 	/**

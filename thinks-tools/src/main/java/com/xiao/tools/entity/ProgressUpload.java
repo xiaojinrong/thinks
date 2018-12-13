@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class ProgressUpload implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	/** 文件名称 */
 	private String fileName;
 
@@ -20,16 +20,13 @@ public class ProgressUpload implements Serializable {
 	private String fileSize;
 
 	/** 进度比 */
-	private String percentage;
+	private double percentage;
 
 	/** 已上传文件大小 */
 	private String uploadFileSize;
 
 	/** 上传速度 */
 	private String downloadSpeed;
-
-	/** 预测时间 */
-	private String predictionTime;
 
 	/** 已用时间 */
 	private String usedTime;
@@ -77,14 +74,6 @@ public class ProgressUpload implements Serializable {
 		this.downloadSpeed = downloadSpeed;
 	}
 
-	public String getPredictionTime() {
-		return predictionTime;
-	}
-
-	public void setPredictionTime(String predictionTime) {
-		this.predictionTime = predictionTime;
-	}
-
 	public String getUsedTime() {
 		return usedTime;
 	}
@@ -101,18 +90,18 @@ public class ProgressUpload implements Serializable {
 		this.remainingTime = remainingTime;
 	}
 
-	public String getPercentage() {
+	public double getPercentage() {
 		return percentage;
 	}
 
-	public void setPercentage(String percentage) {
+	public void setPercentage(double percentage) {
 		this.percentage = percentage;
 	}
 
 	@Override
 	public String toString() {
 		return "ProgressUpload [fileName=" + fileName + ", fileSize=" + fileSize + ", percentage=" + percentage
-				+ ", uploadFileSize=" + uploadFileSize + ", downloadSpeed=" + downloadSpeed + ", predictionTime="
-				+ predictionTime + ", usedTime=" + usedTime + ", remainingTime=" + remainingTime + "]";
+				+ ", uploadFileSize=" + uploadFileSize + ", downloadSpeed=" + downloadSpeed + ", usedTime=" + usedTime
+				+ ", remainingTime=" + remainingTime + "]";
 	}
 }

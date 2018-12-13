@@ -23,10 +23,13 @@ public class MyMultipartResolver extends CommonsMultipartResolver {
 	protected MultipartParsingResult parseRequest(HttpServletRequest request) throws MultipartException {
 		String encoding = determineEncoding(request);
 		FileUpload fileUpload = prepareFileUpload(encoding);
-		progressListeners.setStartTime(System.currentTimeMillis());
+		long currentTime = System.currentTimeMillis();
+		progressListeners.setStartTime(currentTime);
+		progressListeners.setNextTime(currentTime);
 		fileUpload.setProgressListener(progressListeners);
 		try {
 			List<FileItem> fileItems = ((ServletFileUpload) fileUpload).parseRequest(request);
+			progressListeners.setFileItems(fileItems);
 			return parseFileItems(fileItems, encoding);
 		} catch (FileUploadBase.SizeLimitExceededException ex) {
 			throw new MaxUploadSizeExceededException(fileUpload.getSizeMax(), ex);
