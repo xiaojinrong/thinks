@@ -33,9 +33,11 @@ public class ProgressController {
 
 	@PostMapping("/upload")
 	@ResponseBody
-	public String upload(@RequestParam("file") MultipartFile file, ModelMap modelMap) throws Exception {
+	public String upload(@RequestParam("file") MultipartFile file,@RequestParam("files") MultipartFile files, ModelMap modelMap) throws Exception {
 		File img = new File("D://2/" + file.getOriginalFilename());
+		File imgs = new File("D://2/" + files.getOriginalFilename());
 		file.transferTo(img);
+		files.transferTo(imgs);
 		return "OK";
 	}
 

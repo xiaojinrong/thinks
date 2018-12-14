@@ -1,9 +1,9 @@
 package com.xiao.push.listener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.ProgressListener;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +22,8 @@ public class ProgressListeners implements ProgressListener {
 
 	private long nextTime;
 
-	private List<FileItem> fileItems;
-	
+	private List<String> fileItems = new ArrayList<String>();
+
 	/**
 	 * @param pBytesRead
 	 *            已读取文件的比特数
@@ -39,7 +39,8 @@ public class ProgressListeners implements ProgressListener {
 		long usedTime = currentTime - startTime;
 		double percentage = NumberUtil.percents(pBytesRead, pContentLength);
 		double broadbands = pBytesRead * 1.0 / usedTime;
-		progress.setFileName(StringUtil.toString(pItems));
+		progress.setFileName(fileItems.size() == pItems && fileItems.size() != 0 ? fileItems.get(pItems - 1)
+				: StringUtil.toString(pItems));
 		progress.setUsedTime(DateUtil.toTime(usedTime));
 		progress.setDownloadSpeed(NumberUtil.broadbands(broadbands));
 		progress.setFileSize(NumberUtil.broadband(pContentLength));
@@ -74,11 +75,11 @@ public class ProgressListeners implements ProgressListener {
 		this.nextTime = nextTime;
 	}
 
-	public List<FileItem> getFileItems() {
+	public List<String> getFileItems() {
 		return fileItems;
 	}
 
-	public void setFileItems(List<FileItem> fileItems) {
+	public void setFileItems(List<String> fileItems) {
 		this.fileItems = fileItems;
 	}
 }
