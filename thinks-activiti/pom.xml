@@ -9,13 +9,28 @@
 		<artifactId>thinks</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>thinks-data</artifactId>
+	<artifactId>thinks-activiti</artifactId>
 	<packaging>war</packaging>
+	<properties>
+		<activiti.version>5.22.0</activiti.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.xiao</groupId>
 			<artifactId>thinks-tools</artifactId>
 			<version>1.0</version>
+		</dependency>
+		<!-- Activiti工作流依赖 -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<!-- Activiti与SpringBoot集成 -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring-boot-starter-basic</artifactId>
+			<version>${activiti.version}</version>
 		</dependency>
 	</dependencies>
 </project>

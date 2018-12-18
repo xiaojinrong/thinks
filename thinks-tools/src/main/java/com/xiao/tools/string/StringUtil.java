@@ -49,6 +49,17 @@ public class StringUtil {
 	}
 
 	/**
+	 * 判断两字符串是否相等,只要有一方是null，则为false
+	 * 
+	 * @param o1
+	 * @param o2
+	 * @return
+	 */
+	public static boolean equals(Object o1, Object o2) {
+		return o1 == null || o2 == null ? false : toString(o1).equals(o2);
+	}
+
+	/**
 	 * 截取最后一个字符
 	 * 
 	 * @param source
